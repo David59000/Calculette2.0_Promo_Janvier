@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 
 const Calculette = () => {
   // Etats - States
-  // Créer un état calcul
+  // Créer un état total
+  const [total, setTotal] = useState("");
+  
   // Créer un état calcul
   const clickOnButton = (e) => {
     console.log(e.target.innerHTML);
-    // Met à jour l'état calcul
+    setTotal(total + e.target.innerHTML)
   }
 
+  const calc = () => {
+    if (total !=="")
+    setTotal = eval(total);
+  };
+
+
   // Comportements - Les fonctions
-
-
-
 
   useEffect(() => {
   }, []);
@@ -28,7 +33,7 @@ const Calculette = () => {
                 <div className="col-6 offset-3 d-flex align-tems-center">
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="totalCalculette">Total</span>
-                        <input type="text" className="form-control col-5" placeholder="Total" aria-label="Total" aria-describedby="totalCalculette" id="result"disabled />
+                        <input type="text" className="form-control col-5" placeholder="Total" aria-label="Total" aria-describedby="totalCalculette" id="result"disabled value={total} />
                     </div>
                 </div>
         </div>            
@@ -55,12 +60,12 @@ const Calculette = () => {
                         <div className="d-flex flex-row gap-2 col-5">
                             <button type="button" className="btn btn-primary col-3 caracterToAdd" onClick={clickOnButton}>.</button>
                             <button type="button" className="btn btn-primary col-3 caracterToAdd" onClick={clickOnButton}>0</button>
-                            <button type="button" className="btn btn-danger col-3" id="reset" onClick={clickOnButton}>C</button>
+                            <button type="button" className="btn btn-danger col-3" id="reset">C</button>
                             <button type="button" className="btn btn-info col-3 caracterToAdd" onClick={clickOnButton}>*</button>
                         </div>
                         <div className="d-flex flex-row gap-4 col-5">
-                            <button type="button" className="btn btn-danger col-9" id="deleteC" onClick={clickOnButton}>DELETE</button>
-                            <button type="button" className="btn btn-info col-3" id="egal" onClick={clickOnButton}>=</button>
+                            <button type="button" className="btn btn-danger col-9" id="deleteC">DELETE</button>
+                            <button type="button" className="btn btn-info col-3" id="egal">=</button>
                         </div>
                     </div>   
     </>
