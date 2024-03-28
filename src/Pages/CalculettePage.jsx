@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const CalculettePage = () => {
+const Calculette = () => {
   // Etats - States
-  const [Calculette, setCalculette] = useState([]);
+  // Créer un état calcul
+  // Créer un état calcul
+  const clickOnButton = (e) => {
+    console.log(e.target.innerHTML);
+    // Met à jour l'état calcul
+  }
 
   // Comportements - Les fonctions
 
@@ -19,16 +24,17 @@ const CalculettePage = () => {
         
         {/* html de la calculatrice */}
         <div className="container">
-            <h1 className="text-center">Calculette</h1>
+            <h1 className="text-center">Calculette TEST</h1>
                 <div className="col-6 offset-3 d-flex align-tems-center">
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="totalCalculette">Total</span>
                         <input type="text" className="form-control col-5" placeholder="Total" aria-label="Total" aria-describedby="totalCalculette" id="result"disabled />
                     </div>
+        </div>            
             
                     <div className="d-flex flex-column align-items-center bg-secondary gap-3">
                         <div className="d-flex flex-row gap-2 col-5">
-                            <button type="button" className="btn btn-primary col-3 caracterToAdd">1</button>
+                            <button type="button" className="btn btn-primary col-3 caracterToAdd" ocClick={clickOnButton}>1</button>
                             <button type="button" className="btn btn-primary col-3 caracterToAdd">2</button>
                             <button type="button" className="btn btn-primary col-3 caracterToAdd">3</button>
                             <button type="button" className="btn btn-info col-3 caracterToAdd">+</button>
@@ -57,8 +63,7 @@ const CalculettePage = () => {
                         </div>
                     </div>   
                 </div>
-        </div>
     </>
     );
 };
-export default CalculettePage;
+export default Calculette;
