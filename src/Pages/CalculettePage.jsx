@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const Calculette = () => {
   // Etats - States
   // Créer un état total
+
+  const [randomValue, setRandomValue] = useState("");
+  const [currentKey, setCurrentKey] = useState("");
+
   const [total, setTotal] = useState("");
   let reg = new RegExp("^[\\d\\W]+$");
 
@@ -14,7 +18,7 @@ const Calculette = () => {
 
   const calc = () => {
     if (total !== "") {
-      setTotal(eval(total));
+      setTotal(eval(total).toString());
     }
     }
     const resetTotal =() => {
@@ -33,26 +37,35 @@ const Calculette = () => {
 
   // Comportements - Les fonctions
 
+const registerKeyPress = useCallback ((e) => {
+  setCurrentKey(e.key);
+  setRandomValue(Math.random());
+  
+
+})
+
+useEffect(() => {
+  switch (currentKey) {
+    case "Enter":
+      calc(total);
+      break;
+    case "Backspace":
+      deleteTotal();
+      break;
+    case "Delete":
+      resetTotal = "";
+      break;
+    default:
+      if (reg.test(currentKey)) {
+        setTotal(total + currentKey);
+      }
+      break;
+    }
+
+}, [randomValue])
+
   useEffect(() => {
-    document.addEventListener("keyup", (e) => {
-        console.log(e);
-        switch (e.key) {
-          case "Enter":
-            calc(total);
-            break;
-          case "Backspace":
-            deleteTotal();
-            break;
-          case "Delete":
-            resetTotal = "";
-            break;
-          default:
-            if (reg.test(e.key)) {
-              setTotal(total + e.key);
-            }
-            break;
-        }
-      });
+    document.addEventListener("keyup", registerKeyPress)
     
   }, []);
 
